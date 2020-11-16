@@ -1,9 +1,11 @@
 import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import ApolloLinkTimeout from "apollo-link-timeout";
+import { API_URI } from "@env";
 
 const client = new ApolloClient({
-  uri: 'http://192.168.0.18:5000',
-  cache: new InMemoryCache()
+    uri: API_URI,
+    cache: new InMemoryCache()
 });
 
 export default (args: any) => {
