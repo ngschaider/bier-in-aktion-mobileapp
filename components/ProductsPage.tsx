@@ -75,6 +75,7 @@ const GET_PRODUCTS_QUERY = gql`
             salePrice
             additionalInfo
             market {
+                name
                 type
             }
         }

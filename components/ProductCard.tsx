@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, Image, SafeAreaView, ScrollView, RefreshControl, Alert, TextInput } from "react-native";
 import { ListItem, Container, Card } from "native-base";
 import { CONTENT_URI } from "@env";
 
 const ProductCard = (props: any) => {
     const product = props.product;
+
+    const [marketImageErrored, setMarketImageErrored] = useState(false);
+
+    const onMarketImageError = () => {
+        console.log("error");
+        setMarketImageErrored(true);
+    }
 
     const marketImageUrl = CONTENT_URI + "/images/markets/" + product.market.type + ".png";
 
@@ -42,7 +49,11 @@ const ProductCard = (props: any) => {
                         <Text>
                             {product.additionalInfo}
                         </Text>
-                        <Image source={{uri: marketImageUrl}} style={{width: 60, height: 24}} />
+                        {marketImageErrored ? 
+                            <Text>{product.market.name}</Text>
+                            :
+                            <Image source={{uri: marketImageUrl}} style={{width: 60, height: 24}} onError={onMarketImageError} />
+                        }
                     </View>
                 </View>
             </View>
